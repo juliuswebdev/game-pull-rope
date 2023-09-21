@@ -70,8 +70,14 @@ class GameController extends BaseController
             ->update([
                 'score'=> DB::raw('score+1'),
             ]);
+    }
 
-
+    public function roundWinner(Request $request) {
+        $team_id = $request->input('team_id');
+        $round_id = $request->input('round_id');
+        $round = Round::find($round_id);
+        $round->team_id = $team_id;
+        $round->update();
     }
 
 }

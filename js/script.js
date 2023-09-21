@@ -61,7 +61,13 @@ $(document).ready(function() {
     }, 1000);
 
     function setWinner(team_id = 0) {
-
+        $.ajax({
+            method: 'POST',
+            url: api_url + 'users/save',
+            data: { team_id, round_id : $('#start-round').attr('data-round_id') },
+            success: function(data){
+            }
+        });
     }
 
     $('#generate-team').click(function(e) {

@@ -22,6 +22,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('users/save', 'GameController@storeUsers');
     $router->get('users', 'GameController@getUsers');
     $router->get('round', 'GameController@getRound');
+    $router->get('round/winner', 'GameController@roundWinner');
     $router->get('round/stat', 'GameController@getRoundScore');
     $router->get('user/team', 'GameController@userTeam');
     $router->post('user/tap', 'GameController@userTap');
