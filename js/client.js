@@ -14,7 +14,7 @@ $(document).ready(function(){
         isBrowser = true;
     }
 
-    var api_url = 'http://localhost:8001/api/';
+    var api_url = 'https://api.cody-ko.com/api/';
 
     var user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
     var team = localStorage.getItem('team') ? JSON.parse(localStorage.getItem('team')) : null;

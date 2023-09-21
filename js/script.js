@@ -12,7 +12,7 @@ $(document).ready(function() {
         $('#team-b').append(generateTeam(group_team.filter(item => item.team_id === 2 )));
     }
 
-    var api_url = 'http://localhost:8001/api/';
+    var api_url = 'https://api.cody-ko.com/api/';
 
     var start = 492;
     $('#game-slider').css('left', start+'px')
