@@ -27,7 +27,7 @@ $(document).ready(function(){
         if(!$('body').hasClass('has-team')) {
             $.ajax({
                 method: 'GET',
-                url: api_url + 'user/team?user_id='+user.id,
+                url: api_url + 'user/team?user_id='+user?.id,
                 success: function(data){
                     if(data.success == 1) {
                         localStorage.setItem('team', JSON.stringify(data.data));
