@@ -1,0 +1,111 @@
+main {
+    padding: 3em 0;
+    position: relative;
+}
+
+main#server {
+    padding: 0;
+    overflow: hidden
+}
+main#client {
+    height: 100vh;
+}
+
+body.bg-red  *,
+body.bg-blue  * {
+    color: #fff;
+}
+
+#registration1 {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#registration1 {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.users li {
+    font-size: 20px;
+}
+
+main#server .row {
+    height: 100vh
+}
+
+main#server .row > div {
+    padding: 0;
+}
+
+main#server .row > div:nth-child(1) {
+    border-right: 2px solid black;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.bg-blue {
+    background-color: blue;
+}
+
+#team-a ul {
+    margin-left: 60px;
+    float: left;
+}
+
+#team-b ul {
+    margin-right: 60px;
+    float: right;
+}
+
+#game-slider {
+    position: absolute;
+    top: 49%;
+
+    z-index: 99;
+    height: 10px;
+    width: 50%;
+    background-color: black;
+}
+
+#game-slider:before,
+#game-slider:after {
+    position: absolute;
+    top: -43px;
+    content: '';
+    width: 100px;
+    height: 100px;
+}
+
+#game-slider:before {
+    left: 0;
+    background-color: red;
+}
+
+#game-slider:after {
+    right: 0;
+    background-color: blue;
+}
+
+#start-round {
+    position: fixed;
+    bottom: 30px;
+    left: 46.5%;
+}
+#timer-banner {
+    position: fixed;
+    top: 46%;
+    width: 100%;
+    text-align: center;
+    font-size: 100px;
+}
+#round-banner {
+    position: fixed;
+    top: 0;
+    left: 44%;
+    font-size: 40px;
+    background-color: #fff;
+    padding: 30px;
+}
