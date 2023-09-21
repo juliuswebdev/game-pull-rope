@@ -19,6 +19,10 @@ $(document).ready(function() {
     $('#game-slider').css('left', start+'px')
     var team_a_score = 0;
     var team_b_score = 0;
+
+    var team_a_win_score = 0;
+    var team_b_win_score = 0;
+
     var has_winner = false;
     setInterval(function() {
         if(page == 'index') {
@@ -33,42 +37,38 @@ $(document).ready(function() {
             });
         }
         if(page == 'server') {
-            if(!has_winner) {
-                $.ajax({
-                    method: 'GET',
-                    url: api_url + 'round/stat?round_id='+$('#start-round').attr('data-round_id'),
-                    success: function(data){
-                        team_a_score = data.data[0].score
-                        team_b_score = data.data[1].score
-                    }
-                });
-            }
+
             var position = start + (team_a_score * -1) + team_b_score;
-            $('#game-slider').css('left', position+'px')
             if(position <= 0) {
-                alert('Team A Winner');
                 team_a_score = 0;
-                has_winner = true;
-                setWinner(1);
+                team_b_score = 0;
+                position = start;
+                alert('Winner Team A');
+                team_a_win_score = team_a_win_score + 1;
+                $('#round-banner span').text($('#start-round').attr('data-round_id'));
+                $('#team-a h2 span').text(team_a_win_score);
             }
             if(position >= 960) {
-                alert('Team B Winner');
+                team_a_score = 0;
                 team_b_score = 0;
-                has_winner = true;
-                setWinner(2);
+                position = start;
+                alert('Winner Team B');
+                team_b_win_score = team_b_win_score + 1;
+                $('#round-banner span').text($('#start-round').attr('data-round_id'));
+                $('#team-b h2 span').text(team_b_win_score);
             }
+            $.ajax({
+                method: 'GET',
+                url: api_url + 'round/stat?round_id='+$('#round-banner span').text(),
+                success: function(data){
+                    team_a_score = data.data.length > 0 ? data.data[0]?.score : 0;
+                    team_b_score = data.data.length > 0 ? data.data[1]?.score : 0;
+                }
+            });
+            $('#game-slider').css('left', position+'px')
+            
         }
-    }, 1000);
-
-    function setWinner(team_id = 0) {
-        $.ajax({
-            method: 'POST',
-            url: api_url + 'users/save',
-            data: { team_id, round_id : $('#start-round').attr('data-round_id') },
-            success: function(data){
-            }
-        });
-    }
+    }, 300);
 
     $('#generate-team').click(function(e) {
         e.preventDefault();
@@ -112,7 +112,6 @@ $(document).ready(function() {
             url: api_url + 'users/save',
             data: { users },
             success: function(data){
-
                 if(data.success == 1) {
                     window.location.href = "server.html";
                 } else {
@@ -124,10 +123,9 @@ $(document).ready(function() {
     var counter = 5;
     $('#start-round').click(function(e) {
         e.preventDefault();
-        has_winner = false;
         var round_id = $(this).attr('data-round_id');
         $('#timer-banner').show();
-
+     
         setTimeout(function() {
                 $.ajax({
                     method: 'POST',

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('rounds', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('winner_team_id')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
         });

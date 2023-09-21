@@ -61,9 +61,9 @@ main#server .row > div:nth-child(1) {
 }
 
 #game-slider {
+    transition: all ease-in-out;
     position: absolute;
     top: 49%;
-
     z-index: 99;
     height: 10px;
     width: 50%;

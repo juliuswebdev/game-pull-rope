@@ -68,7 +68,7 @@ class GameController extends BaseController
             ->leftJoin('rounds', 'rounds.id', '=', 'round_stats.round_id')
             ->where('rounds.status', 1)
             ->update([
-                'score'=> DB::raw('score+1'),
+                'score'=> DB::raw('score+20'),
             ]);
     }
 
