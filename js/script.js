@@ -12,12 +12,14 @@ $(document).ready(function() {
         $('#team-b').append(generateTeam(group_team.filter(item => item.team_id === 2 )));
     }
 
-    var api_url = 'https://api.cody-ko.com/api/';
+    //var api_url = 'http://localhost:8001/api/';
+    var api_url = 'http://api.cody-ko.com/api/';
 
     var start = 492;
     $('#game-slider').css('left', start+'px')
     var team_a_score = 0;
     var team_b_score = 0;
+    var has_winner = false;
     setInterval(function() {
         if(page == 'index') {
             $.ajax({
@@ -31,16 +33,28 @@ $(document).ready(function() {
             });
         }
         if(page == 'server') {
+            if(!has_winner) {
+                $.ajax({
+                    method: 'GET',
+                    url: api_url + 'round/stat?round_id='+$('#start-round').attr('data-round_id'),
+                    success: function(data){
+                        team_a_score = data.data[0].score
+                        team_b_score = data.data[1].score
+                    }
+                });
+            }
             var position = start + (team_a_score * -1) + team_b_score;
             $('#game-slider').css('left', position+'px')
             if(position <= 0) {
                 alert('Team A Winner');
                 team_a_score = 0;
+                has_winner = true;
                 setWinner(1);
             }
             if(position >= 960) {
                 alert('Team B Winner');
                 team_b_score = 0;
+                has_winner = true;
                 setWinner(2);
             }
         }
@@ -104,6 +118,7 @@ $(document).ready(function() {
     var counter = 5;
     $('#start-round').click(function(e) {
         e.preventDefault();
+        has_winner = false;
         var round_id = $(this).attr('data-round_id');
         $('#timer-banner').show();
 

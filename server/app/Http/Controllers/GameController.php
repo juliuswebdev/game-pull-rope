@@ -54,6 +54,13 @@ class GameController extends BaseController
         return response()->json($message, 200);
     }
 
+    public function getRoundScore(Request $request) {
+        $round_id = $request->input('round_id');
+        $round_stat = RoundStat::where('round_id',$round_id)->get();
+        $message = ['data' => $round_stat, 'success' => 1];
+        return response()->json($message, 200);
+    }
+
     public function userTap(Request $request) {
         $team_id = $request->input('team_id');
         $round_id = $request->input('round_id');
