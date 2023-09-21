@@ -13,7 +13,7 @@ $(document).ready(function() {
     }
 
     //var api_url = 'http://localhost:8001/api/';
-    var api_url = 'http://api.cody-ko.com/api/';
+    var api_url = 'https://api.cody-ko.com/api/';
 
     var start = 492;
     $('#game-slider').css('left', start+'px')
