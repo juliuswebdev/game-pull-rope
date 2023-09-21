@@ -7,9 +7,11 @@ $(document).ready(function() {
     })
 
     var group_team = localStorage.getItem('group_team') ? JSON.parse(localStorage.getItem('group_team')) : null;
-    console.log(group_team);
-    $('#team-a').append(generateTeam(group_team.filter(item => item.team_id === 1 )));
-    $('#team-b').append(generateTeam(group_team.filter(item => item.team_id === 2 )));
+    if(page == 'server') {
+        $('#team-a').append(generateTeam(group_team.filter(item => item.team_id === 1 )));
+        $('#team-b').append(generateTeam(group_team.filter(item => item.team_id === 2 )));
+    }
+
     var api_url = 'http://localhost:8001/api/';
 
     var start = 492;
