@@ -51,6 +51,8 @@ $(document).ready(function(){
             }
         });
         round = localStorage.getItem('round') ? JSON.parse(localStorage.getItem('round')) : null;
+        team = localStorage.getItem('team') ? JSON.parse(localStorage.getItem('team')) : null;
+        user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
     }, 1000);
 
 
